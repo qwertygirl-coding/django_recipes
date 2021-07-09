@@ -18,6 +18,7 @@ from django.urls import include, path
 from register import views as v
 
 urlpatterns = [
+    path('', include('recipes.urls')),
     path('recipes/', include('recipes.urls')),
     path('admin/', admin.site.urls),
     path('register/', v.register, name='register'),
