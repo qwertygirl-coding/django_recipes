@@ -1,0 +1,45 @@
+{% extends 'recipes/base.html' %}
+
+  {% block title %}Menu{% endblock %}
+
+  {% block main %}
+        <h1>Menu</h1>
+    {% if menu %}
+        <div class ="container">
+        {% for recipe in menu %}
+            <div class="row pt-3">
+                <div class="col-4">
+                    <a href="{% url 'recipes:detail' recipe.id %}">{{ recipe.recipe_name }}</a>
+                </div>
+                <div class="col-1">
+                    <form action="" method="post" class="form-group">
+                    {% csrf_token %}
+                    <button type="submit" name='remove_{{ recipe.id }}' class="btn btn-secondary btn-sm">Remove</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+
+        {% if shopping_dict %}
+        <p></p>
+        <h2> Shopping List </h2>
+        <ul class="list-group">
+        {% for ingredient, i_dict in shopping_dict.items %}
+            <li class="list-group-item">
+                <div class="row">
+                <div class="col-6">{{ ingredient }}</div>
+                    {% for key, value in i_dict.items %}
+                    <div class="col">{{ value|floatformat:2 }} {{ key }}</div>
+                    {% endfor %} 
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+    {% else %}
+        <p>No recipes in menu.</p>
+    {% endif %}
+
+  {% endblock %} 

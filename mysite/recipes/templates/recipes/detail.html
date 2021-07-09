@@ -1,0 +1,67 @@
+{% extends 'recipes/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+  {% block title %}{{ recipe.recipe_name }}{% endblock %}
+
+  {% block main %}
+    <h1>{{ recipe.recipe_name }}</h1>
+
+    {% if menu_form %}
+    <form action="" method="post" class="form-group">
+        {% csrf_token %}
+         <button type="submit" name='save_menu' class="btn btn-primary">Save to Menu</button>
+      </form>
+    {% endif %}
+
+    <p></p>
+    <div class="d-flex align-items-center">
+      <div class="flex-grow-1 ms-3">
+
+        <b>Total Time: </b> {{ recipe.total_time }} minutes<br>
+
+        {% if recipe.yields != '' %}
+          <b>Yields: </b> {{ recipe.yields }}
+        {% endif %}
+        <p></p>
+
+        <h3>Ingredients</h3>
+        <ul>
+        {% for ingredient in ingredient_list %}
+          <li>{{ ingredient.original_string }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+
+      <div class="flex-shrink-0">
+        {% if recipe.image %}
+          <img src="{{ recipe.image }}" class="align-self-center" alt="{{ recipe.recipe_name }}" object-fit="scale-down" width='300', height="300">
+        {% else %}
+          <img src="{% static 'images/default_image.jpg' %}" class="align-self-center" alt="{{ recipe.recipe_name }}" object-fit="scale-down" width='300', height="300">
+        {% endif %}
+    </div>
+    
+    </div>
+
+    <h3>Instructions</h3>
+    <ol>
+    {% for instruction in instruction_list %}
+      <li>{{ instruction }}</li>
+    {% endfor %}
+    </ol>
+   
+    {% if recipe.url != '' %}
+      <p><a href="{{ recipe.url }}">Recipe from {{ recipe.host }}</a></p>
+    {% endif %}
+
+    {% if comment_form %}
+      <p></p>
+      <form action="" method="post" class="form-group">
+        {% csrf_token %}
+        {{ comment_form|crispy }}
+         <button type="submit" name='save_comment' class="btn btn-primary">Save/Edit</button>
+      </form>
+      <p></p>
+    {% endif %}
+
+  {% endblock %} 

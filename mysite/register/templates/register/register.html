@@ -1,0 +1,15 @@
+{% extends 'recipes/base.html' %}
+
+  {% block title %}Register{% endblock %}
+
+  {% block main %}
+    <form action="" method="post" class="form-group">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <p>Already have an account? Log in <a href="{% url 'login' %}">here</a></p>
+
+  {% endblock %} 
+
+ 

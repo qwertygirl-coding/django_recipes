@@ -1,0 +1,7 @@
+gunicorn
+django
+recipe_scrapers
+parse_ingredients
+re
+random
+nltk.tokenize

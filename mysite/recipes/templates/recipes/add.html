@@ -1,0 +1,39 @@
+{% extends 'recipes/base.html' %}
+{% load crispy_forms_tags %}
+
+  {% block title %}Add Recipe{% endblock %}
+
+  {% block main %}
+  <h1>Add recipe:</h1>
+  <form id="myFormsets" method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table id="FormTable" border="0" cellpadding="0">
+      {{ formR|crispy }}
+    </table>
+    <p></p>
+    <h4>Add Ingredients:</h4>
+    <table id="myFormset1Table" border="0" cellpadding="0">
+      <tbody>
+           <tr>
+            <td><b>Ingredient name:</b></td>
+            <td><b>Quantity:</b></td>
+            <td><b>Unit:</b></td>
+            <td><b>Comment:</b></td>
+           </tr> 
+            {% for form in formset1.forms %}
+             <tr>
+                <td>{{ form.ingredient_name }}</td>
+                <td>{{ form.quantity }}</td>
+                <td>{{ form.unit }}</td>
+                <td>{{ form.comment }}</td>
+             </tr>
+           {% endfor %}
+        </tbody>
+    </table>
+    {{ formset1.management_form }}
+    <p></p>
+    <button type="submit" class="btn btn-primary">Submit</button>
+   </form>
+   <p></p>
+   Or <a href="{% url 'recipes:add_auto' %}">add automatically.</a>
+  {% endblock %}

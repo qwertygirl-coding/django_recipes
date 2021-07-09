@@ -1,0 +1,13 @@
+{% extends 'recipes/base.html' %}
+
+  {% block title %}Search{% endblock %}
+  {% block main %}
+  <h1 class='display-5'>Results</h1>
+    <p></p>
+    <ul>
+      {% for recipe in result_set %}
+         <li><a href="{% url 'recipes:detail' recipe.id %}">{{ recipe.recipe_name }}</a>
+      {% endfor %}
+    </ul>
+
+  {% endblock %} 

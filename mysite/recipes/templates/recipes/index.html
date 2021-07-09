@@ -1,0 +1,30 @@
+{% extends 'recipes/base.html' %}
+{% load static %}
+
+  {% block title %}Home{% endblock %}
+
+  {% block main %}
+    <h1 class='display-4'>Latest Recipes</h1>
+    {% if latest_recipe_list %}
+        <div class="container">
+        <div class='row row-cols-3'>
+        {% for recipe in latest_recipe_list %}
+        <div class="card text-center" style="width: 18rem">
+          {% if recipe.image %}
+            <img src="{{ recipe.image }}" class="card-img-top" alt="{{ recipe.recipe_name }}" object-fit="scale-down" width="18rem", height="300">
+          {% else %}
+            <img src="{% static 'images/default_image.jpg' %}" class="card-img-top" alt="{{ recipe.recipe_name }}" object-fit="scale-down" width="18rem", height="300">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ recipe.recipe_name }}</h5>
+            <a href="{% url 'recipes:detail' recipe.id %}" class="btn btn-success">Check it out!</a>
+          </div>
+        </div>
+        {% endfor %}
+        </div>
+        </div>   
+    {% else %}
+        <p>No recipes currently available.</p>
+    {% endif %}
+
+  {% endblock %} 
