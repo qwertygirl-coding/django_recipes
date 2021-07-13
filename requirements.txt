@@ -12,3 +12,4 @@ regex==2021.4.4
 requests==2.25.1
 sqlparse==0.4.1
 whitenoise==5.2.0
+nltk==3.6.2
