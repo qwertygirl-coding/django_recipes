@@ -16,9 +16,6 @@ from .forms import RecipeForm, IngredientForm, WebForm, CommentForm
 from .helpers import recipe_to_dict, metric_converter
 import random
 
-# for spliting sentences in instructions
-from nltk.tokenize import sent_tokenize
-
 # Create your views here.
 def index(request):
     latest_recipe_list = Recipe.objects.order_by('-pub_date')[:6]
@@ -28,11 +25,7 @@ def index(request):
 def detail(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
     ingredient_list = Recipe_Ingredient.objects.filter(recipe=recipe)
-    # split instructions into steps by sentences
-    try:
-        instruction_list = sent_tokenize(recipe.instructions) 
-    except:
-        instruction_list = [recipe.instructions]
+    instructions =recipe.instructions
     # menu and comment forms for logged in user
     if request.user.is_authenticated:
         # get comment if already exists
