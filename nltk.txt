@@ -2,4 +2,3 @@ wordnet
 reuters
 punkt
 stopwords
-
