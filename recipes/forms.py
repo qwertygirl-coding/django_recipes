@@ -29,7 +29,8 @@ class IngredientForm(forms.Form):
         ("pint", "pint"),
         ("gal", "gallon"),
         ("pinch", "pinch"),
-        ("bunch", "bunch")]
+        ("bunch", "bunch"),
+        ("n/a", "n/a")]
 
     ingredient_name = forms.CharField(max_length=200)
     quantity = forms.FloatField()
