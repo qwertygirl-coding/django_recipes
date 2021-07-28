@@ -33,7 +33,7 @@ class IngredientForm(forms.Form):
         ("n/a", "n/a")]
 
     ingredient_name = forms.CharField(max_length=200)
-    quantity = forms.FloatField()
+    quantity = forms.FloatField(min_value=0)
     unit = forms.ChoiceField(choices = UNIT_CHOICES)
     comment = forms.CharField(max_length=100, required=False)
 
