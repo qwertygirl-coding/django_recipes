@@ -158,7 +158,8 @@ def add(request):
                 unit = form.cleaned_data['unit']
                 try:
                     comment = form.cleaned_data['comment']
-                except comment = ''
+                except: 
+                    comment = ''
                 original_string = f'{quantity} {unit} {ingredient_name} {comment}'
                 ingredient_details = Recipe_Ingredient(recipe=r, ingredient = ing, quantity=quantity, unit=unit, comment=comment, original_string=original_string)              
             # redirect to a new URL:
