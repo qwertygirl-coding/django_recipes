@@ -32,8 +32,8 @@ class IngredientForm(forms.Form):
         ("bunch", "bunch")]
 
     ingredient_name = forms.CharField(max_length=200)
-    quantity = forms.FloatField(required=False)
-    unit = forms.ChoiceField(choices = UNIT_CHOICES, required=False)
+    quantity = forms.FloatField()
+    unit = forms.ChoiceField(choices = UNIT_CHOICES)
     comment = forms.CharField(max_length=100, required=False)
 
     def clean_quantity(self):

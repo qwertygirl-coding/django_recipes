@@ -19,7 +19,7 @@ import random
 # Create your views here.
 def index(request):
     latest_recipe_list = Recipe.objects.order_by('-pub_date')[:6]
-    context = {'latest_recipe_list': latest_recipe_list}
+    context = {'latest_recipe_list': latest_recipe_list,}
     return render(request, 'recipes/index.html', context)
 
 def detail(request, recipe_id):
@@ -156,7 +156,9 @@ def add(request):
                 #create Recipe_Ingredients 
                 quantity = form.cleaned_data['quantity']
                 unit = form.cleaned_data['unit']
-                comment = form.cleaned_data['comment']
+                try:
+                    comment = form.cleaned_data['comment']
+                except comment = ''
                 original_string = f'{quantity} {unit} {ingredient_name} {comment}'
                 ingredient_details = Recipe_Ingredient(recipe=r, ingredient = ing, quantity=quantity, unit=unit, comment=comment, original_string=original_string)              
             # redirect to a new URL:
